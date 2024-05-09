@@ -57,7 +57,7 @@ const Footer = () => {
                   href="mailto: taimour.rkt@gmail.com"
                   className="mt-2 d-block md-0 text-white"
                 >
-                  taimour.rkt@gmail.com
+                  vmart@gmail.com
                 </a>
               </div>
               <div className="social-icons d-flex align-items-center gap-30 mt-4 ">

@@ -132,7 +132,7 @@ const Checkout = () => {
               </nav>
               <h4 className="title total">Contact information</h4>
               <p className="user-details total">
-                Taimour Afzal (taimour.rkt@gmail.com)
+                Vmart (vmart@gmail.com)
               </p>
               <h4 className="mb-3">Shipping Address</h4>
               <form

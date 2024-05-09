@@ -23,13 +23,17 @@ const Header = () => {
 
   const handleSearch = async (search) => {
     try {
+      const command = "search for ";
+      const query = transcript.replace(command, "").trim().replace(/\s/g, "");
+      console.log("Voice", query);
       const response = await fetch("/products/search", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ query: search }),
+        body: JSON.stringify({ query: query }),
       });
+      resetTranscript("");
       const data = await response.json();
       setSearchResults(data);
       console.log(data);
@@ -169,37 +173,17 @@ const Header = () => {
   ];
 
   const { transcript, resetTranscript } = useSpeechRecognition({ commands });
+  
   return (
     <>
-      <header className="header-top-strip py-3">
-        <div className="container-xxl">
-          <div className="row">
-            <div className="col-6">
-              <p className="text-white mb-0">
-                Free Shipping over PKR100 & Free Returns
-              </p>
-            </div>
-            <div className="col-6">
-              <p className="text-end text-white mb-0">
-                Hotline:
-                <a className="text-white" href="tel:+92 3328578135">
-                  +0900-78601
-                </a>
-              </p>
-            </div>
-            <div>
-              <input value={transcript} type="text"></input>
-            </div>
-          </div>
-        </div>
-      </header>
+      
 
       <header className="header-upper py-3">
         <div className="container-xxl">
           <div className="row align-items-center">
             <div className="col-2">
               <h2>
-                <Link className="text-white ">VoiceMart</Link>
+                <Link className="text-white ">&#127897;<>VoiceMart</></Link>
               </h2>
             </div>
             <div className="col-5">
@@ -233,13 +217,13 @@ const Header = () => {
             <div className="col-5">
               <div className="header-upper-links gap-1 d-flex align-items-center justify-content-between">
                 <div>
-                  <Link
-                    to="/compare-product"
-                    className="d-flex align-items-center text-white"
+                <Link
+                    to="/login"
+                    className="d-flex align-items-center gap-10 text-white"
                   >
-                    <img src={compareImg} alt="" />
+                    <img src={userImg} alt="user" />
                     <p className="mb-0">
-                      Compare <br /> Products
+                      Log in
                     </p>
                   </Link>
                 </div>
@@ -250,12 +234,19 @@ const Header = () => {
                   >
                     <img src={wishlistImg} alt="wishlist" />
                     <p className="mb-0">
-                      Favourite <br /> wishlist
+                      Favourite 
                     </p>
                   </Link>
                 </div>
                 <div>
-                  <Link
+                <Link
+                    to="/"
+                    className="d-flex align-items-center gap-10 text-white"
+                  >
+                    <img src={userImg} alt="user" />
+                    <p className="mb-0">Logout</p>
+                  </Link>
+                  {/* <Link
                     to="/login"
                     className="d-flex align-items-center gap-10 text-white"
                   >
@@ -263,7 +254,7 @@ const Header = () => {
                     <p className="mb-0">
                       Log in <br /> My Account
                     </p>
-                  </Link>
+                  </Link> */}
                 </div>
                 <div>
                   <Link
@@ -272,19 +263,18 @@ const Header = () => {
                   >
                     <img src={cartImg} alt="cart" />
                     <div className="d-flex flex-column gap-10">
-                      <span className="badge bg-white text-dark">0</span>
-                      <p className="mb-0">PKR 500</p>
+                     
                     </div>
                   </Link>
                 </div>
                 <div>
-                  <Link
+                  {/* <Link
                     to="/"
                     className="d-flex align-items-center gap-10 text-white"
                   >
                     <img src={userImg} alt="user" />
                     <p className="mb-0">Logout</p>
-                  </Link>
+                  </Link> */}
                 </div>
               </div>
             </div>
@@ -293,55 +283,72 @@ const Header = () => {
       </header>
 
       <header className="header-bottom py-3">
-        <div className="container-xxl">
-          <div className="row">
-            <div className="col-12">
-              <div className="menu-bottom d-flex align-items-center gap-15">
-                <div>
-                  <div className="dropdown">
-                    <button
-                      className="btn btn-secondary dropdown-toggle bg-transparent border-0 gap-15 d-flex align-items-center"
-                      type="button"
-                      data-bs-toggle="dropdown"
-                      aria-expanded="false"
-                    >
-                      <img src={menuImg} alt="" />
-                      <span className="me-5 d-inline-block">
-                        Shop Categories
-                      </span>
-                    </button>
-                    <ul className="dropdown-menu">
-                      <li>
-                        <Link className="dropdown-item text-white " to="">
-                          Action
-                        </Link>
-                      </li>
-                      <li>
-                        <Link className="dropdown-item text-white " to="">
-                          Another action
-                        </Link>
-                      </li>
-                      <li>
-                        <Link className="dropdown-item text-white " to="">
-                          Something else here
-                        </Link>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-                <div className="menu-links">
-                  <div className="d-flex align-items-center gap-15">
-                    <NavLink to="/">Home</NavLink>
-                    <NavLink to="/product">Our Store</NavLink>
-                    <NavLink to="blogs">Blogs</NavLink>
-                    <NavLink to="/contact">Contact</NavLink>
-                  </div>
-                </div>
+    <div className="container-xxl">
+      <div className="row">
+        <div className="col-12">
+          <div className="menu-bottom d-flex align-items-center -0 gap-15">
+            <div>
+              <div className="dropdown">
+                <button
+                  className="btn btn-secondary dropdown-toggle bg-transparent border-0 gap-1 d-flex align-items-center"
+                  type="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  <span className="d-inline-block">SHOP CATEGORIES</span>
+                </button>
+                <ul className="dropdown-menu">
+                  <li><Link className="dropdown-item text-white" to="">Mobile Phones</Link></li>
+                  <li><Link className="dropdown-item text-white" to="">IPads</Link></li>
+                  <li><Link className="dropdown-item text-white" to="">Smart Watches</Link></li>
+                  <li><Link className="dropdown-item text-white" to="">Headphones</Link></li>
+                  <li><Link className="dropdown-item text-white" to="">Other Accessories</Link></li>
+                </ul>
+              </div>
+            </div>
+            <div className="menu-links">
+              <div className="d-flex align-items-center gap-15">
+                <NavLink 
+                  to="/" 
+                  style={{ textDecoration: 'none' }} 
+                  onMouseEnter={(e) => e.target.style.textDecoration = 'underline'}
+                  onMouseLeave={(e) => e.target.style.textDecoration = 'none'}
+                >
+                  Home
+                </NavLink>
+                <NavLink 
+                  to="/product"
+                  style={{ textDecoration: 'none' }} 
+                  onMouseEnter={(e) => e.target.style.textDecoration = 'underline'}
+                  onMouseLeave={(e) => e.target.style.textDecoration = 'none'}
+                >
+                  Our Store
+                </NavLink>
+                <NavLink 
+                  to="/about" 
+                  style={{ textDecoration: 'none' }} 
+                  onMouseEnter={(e) => e.target.style.textDecoration = 'underline'}
+                  onMouseLeave={(e) => e.target.style.textDecoration = 'none'}
+                >
+                  About us
+                </NavLink>
+                <NavLink 
+                  to="/contact" 
+                  style={{ textDecoration: 'none' }} 
+                  onMouseEnter={(e) => e.target.style.textDecoration = 'underline'}
+                  onMouseLeave={(e) => e.target.style.textDecoration = 'none'}
+                >
+                  Contact Us
+                </NavLink>
               </div>
             </div>
           </div>
         </div>
-      </header>
+      </div>
+    </div>
+</header>
+
+
     </>
   );
 };

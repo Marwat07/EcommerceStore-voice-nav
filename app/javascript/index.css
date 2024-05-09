@@ -504,7 +504,11 @@ footer .input-group-text {
   background-color: var(--color-febd69);
   border-color: var(--color-febd69);
 }
-
+.product-parent{
+  display: grid;
+  width: 100%;
+  grid-template-columns: 33% 33% 33%; 
+}
 .sub-title {
   font-size: 14px;
   font-weight: 600;

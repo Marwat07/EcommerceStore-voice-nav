@@ -50,7 +50,7 @@ const ProductCard = ({ productId, onCardClick, onVoiceCommand }) => {
   const imgPath = product.image_path;
 
   return (
-    <div className={`col-3`}>
+    <div className={`col-3 `} style={{width: "90%" }}>
       <Link
         to={`/product/${product.id}`}
         className="product-card position-relative"
@@ -62,7 +62,7 @@ const ProductCard = ({ productId, onCardClick, onVoiceCommand }) => {
             <img src={wishImg} alt="wish" />
           </button>
         </div>
-        <div className="product-image">
+        <div className="product-image" style={{display:'flex',justifyContent:'center'}}>
           <img
             src={product.image_path}
             alt="product image"
@@ -84,7 +84,7 @@ const ProductCard = ({ productId, onCardClick, onVoiceCommand }) => {
             edit={false}
             activeColor="#ffc700"
           ></ReactStars>
-          <p className="d-block">{product.description}</p>
+          <p className="d-block">{product.description.length > 20 ? `${product.description.substring(0,20)}...`: product.description}</p>
           <p className="price">{product.price}</p>
         </div>
         <div className="action-bar position-absolute">

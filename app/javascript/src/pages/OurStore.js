@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import BreadCrumb from "../components/BreadCrumb";
 import Meta from "../components/Meta";
 import ReactStars from "react-rating-stars-component";
@@ -14,6 +14,25 @@ import gr4Img from "../../Public/images/gr4.svg";
 
 const OurStore = () => {
   const [grid, setGrid] = useState(4);
+  
+  const divRefs = useRef([]);
+
+  function handleClick() {
+    const visibleDivs = visibleElements.map((id) =>
+      divRefs.current.find((ref) => ref.id === id)
+    );
+    const firstVisibleDiv = visibleDivs[0];
+    if (firstVisibleDiv) {
+      firstVisibleDiv.click(); // Trigger click event on the visible product card
+    }
+  }
+  const handleVoiceCommand = (product) => {
+    navigate(`/product/${product.id}`); // Redirect to the SingleProduct page with the selected product's ID
+  };
+  const handleCardClick = (productId) => {
+    // onCardClick(product); // Pass the product data to the parent component
+    navigate(`/product/${productId}`);
+  };
 
   return (
     <div>
@@ -196,6 +215,7 @@ const OurStore = () => {
                     <option value="best-selling" selected="selected">
                       Best Selling
                     </option>
+                    
                     <option value="title-ascending">Alhabetically, A-Z</option>
                     <option value="title-descending">Alhabetically, Z-A</option>
                     <option value="price-ascending">Price, Low to High</option>
@@ -204,6 +224,7 @@ const OurStore = () => {
                     <option value="created-descending">Date, new to old</option>
                   </select>
                 </div>
+          
                 <div className="d-flex align-items-center gap-10">
                   <p className="totalproducts mb-0">21 Products</p>
                   <div className="d-flex gap-10 align-items-center grid">
@@ -249,11 +270,98 @@ const OurStore = () => {
               <div className="d-flex gap-10 flex-wrap">
                 <ProductCard grid={grid} />
               </div>
+              
             </div>
+             
+      <Container class1="featured-wrapper py-5 home-wrapper-2">
+        <h3 className="section-heading">Featured Collection</h3>
+        <div className="product-parent" >
+          {/* product 1 div */}
+          <div className="product-card-wrapper"
+            ref={(element) => (divRefs.current[0] = element)}
+            id={0}
+            onClick={() => handleCardClick(7)}
+            style={{ width: "100%" }}
+          >
+            <ProductCard
+              productId={10}
+              handleCardClick={handleCardClick}
+              onVoiceCommand={handleVoiceCommand}
+            />
+          </div>
+          {/* product 1 div */}
+          <div className="product-card-wrapper"
+            ref={(element1) => (divRefs.current[1] = element1)}
+            id={1}
+            onClick={() => handleCardClick(8)}
+          >
+            <ProductCard
+              productId={4}
+              handleCardClick={handleCardClick}
+              onVoiceCommand={handleVoiceCommand}
+            />
+          </div>
+          {/* product 1 div */}
+          <div className="product-card-wrapper"
+            ref={(element2) => (divRefs.current[2] = element2)}
+            id={2}
+            onClick={() => handleCardClick(7)}
+          >
+            <ProductCard
+              productId={11}
+              handleCardClick={handleCardClick}
+              onVoiceCommand={handleVoiceCommand}
+            />
+          </div>
+          {/* product 1 div */}
+          <div className="product-card-wrapper"
+            ref={(element2) => (divRefs.current[2] = element2)}
+            id={2}
+            onClick={() => handleCardClick(7)}
+          >
+            <ProductCard
+              productId={12}
+              handleCardClick={handleCardClick}
+              onVoiceCommand={handleVoiceCommand}
+            />
+          </div>
+          {/* product 1 div */}
+          <div className="product-card-wrapper"
+            ref={(element2) => (divRefs.current[2] = element2)}
+            id={2}
+            onClick={() => handleCardClick(7)}
+          >
+            <ProductCard
+              productId={13}
+              handleCardClick={handleCardClick}
+              onVoiceCommand={handleVoiceCommand}
+            />
+          </div>
+          {/* product 1 div */}
+          <div className="product-card-wrapper"
+            ref={(element3) => (divRefs.current[3] = element3)}
+            id={3}
+            
+          >
+            <ProductCard
+              productId={8}
+              handleCardClick={handleCardClick}
+              onVoiceCommand={handleVoiceCommand}
+            />
           </div>
         </div>
       </Container>
+          </div>
+        </div>
+        
+      </Container>
+      
+      
     </div>
+    
+      
+  
+    
   );
 };
 

@@ -37,6 +37,32 @@ import { services } from "../utils/Data";
 const Home = () => {
   const [selectedProduct, setSelectedProduct] = useState(null);
   const navigate = useNavigate();
+  useEffect(() => {
+    const script = document.createElement('script')
+    script.src = 'https://cdn.botpress.cloud/webchat/v1/inject.js'
+    script.async = true
+    document.body.appendChild(script)
+
+    script.onload = () => {
+      window.botpressWebChat.init({
+        "composerPlaceholder": "Ask",
+        "botConversationDescription": "Ask Anything",
+        "botId": "77897414-bc66-401a-ad8b-db911129322c",
+        "hostUrl": "https://cdn.botpress.cloud/webchat/v1",
+        "messagingUrl": "https://messaging.botpress.cloud",
+        "clientId": "77897414-bc66-401a-ad8b-db911129322c",
+        "webhookId": "ee844b11-0ea3-45a1-a5ee-e8996ae23f93",
+        "lazySocket": true,
+        "themeName": "prism",
+        "botName": "VMart Helper",
+        "frontendVersion": "v1",
+        "useSessionStorage": true,
+        "enableConversationDeletion": true,
+        "theme": "prism",
+        "themeColor": "#ebad25"
+      })
+    }
+  }, [])
 
   function handleDivClick(productId) {
     navigate(`/product/${productId}`);
@@ -108,6 +134,7 @@ const Home = () => {
 
   return (
     <>
+      <div id="webchat" />
       <div className="floating-number">{JSON.stringify(visibleElements)}</div>
       <Container class1="home-wrapper-1 py-5">
         <div className="row">
@@ -279,16 +306,17 @@ const Home = () => {
       </Container>
 
       <Container class1="featured-wrapper py-5 home-wrapper-2">
-        <h3 className="section-heading">Featurd Collection</h3>
-        <div >
+        <h3 className="section-heading">Featured Collection</h3>
+        <div className="product-parent" >
           {/* product 1 div */}
           <div className="product-card-wrapper"
             ref={(element) => (divRefs.current[0] = element)}
             id={0}
             onClick={() => handleCardClick(7)}
+            style={{ width: "100%" }}
           >
             <ProductCard
-              productId={7}
+              productId={10}
               handleCardClick={handleCardClick}
               onVoiceCommand={handleVoiceCommand}
             />
@@ -300,7 +328,7 @@ const Home = () => {
             onClick={() => handleCardClick(8)}
           >
             <ProductCard
-              productId={8}
+              productId={4}
               handleCardClick={handleCardClick}
               onVoiceCommand={handleVoiceCommand}
             />
@@ -312,7 +340,31 @@ const Home = () => {
             onClick={() => handleCardClick(7)}
           >
             <ProductCard
-              productId={7}
+              productId={11}
+              handleCardClick={handleCardClick}
+              onVoiceCommand={handleVoiceCommand}
+            />
+          </div>
+          {/* product 1 div */}
+          <div className="product-card-wrapper"
+            ref={(element2) => (divRefs.current[2] = element2)}
+            id={2}
+            onClick={() => handleCardClick(7)}
+          >
+            <ProductCard
+              productId={12}
+              handleCardClick={handleCardClick}
+              onVoiceCommand={handleVoiceCommand}
+            />
+          </div>
+          {/* product 1 div */}
+          <div className="product-card-wrapper"
+            ref={(element2) => (divRefs.current[2] = element2)}
+            id={2}
+            onClick={() => handleCardClick(7)}
+          >
+            <ProductCard
+              productId={13}
               handleCardClick={handleCardClick}
               onVoiceCommand={handleVoiceCommand}
             />
@@ -398,12 +450,21 @@ const Home = () => {
       <Container class1="popular-wrapper py-5 home-wrapper-2">
         <div className="row">
           <h3 className="section-heading">Our Popular Products</h3>
-          <div className="row">
-            <ProductCard productId={7} onCardClick={handleCardClick} />
-            <ProductCard productId={8} onCardClick={handleCardClick} />
-            <ProductCard productId={7} onCardClick={handleCardClick} />
-            <ProductCard productId={8} onCardClick={handleCardClick} />
+
+
+          <div className="product-parent">
+            <div className="product-card-wrapper"
+
+              style={{ width: "100%" }}
+            >
+              <ProductCard productId={5} onCardClick={handleCardClick} />
+
+            </div>
+
+
+
           </div>
+
         </div>
       </Container>
 
@@ -442,25 +503,7 @@ const Home = () => {
         </div>
       </Container>
 
-      <Container class1="blog-wrapper py-5 home-wrapper-2">
-        <div className="row">
-          <h3 className="section-heading">Our Latest Blogs</h3>
-        </div>
-        <div className="row">
-          <div className="col-3">
-            <BlogCard />
-          </div>
-          <div className="col-3">
-            <BlogCard />
-          </div>
-          <div className="col-3">
-            <BlogCard />
-          </div>
-          <div className="col-3">
-            <BlogCard />
-          </div>
-        </div>
-      </Container>
+
     </>
   );
 };

@@ -29,15 +29,7 @@ const Blog = () => {
               <div className="col-6 mb-0">
                 <BlogCard />
               </div>
-              <div className="col-6 mb-0">
-                <BlogCard />
-              </div>
-              <div className="col-6 mb-0">
-                <BlogCard />
-              </div>
-              <div className="col-6 mb-0">
-                <BlogCard />
-              </div>
+             
             </div>
           </div>
         </div>
